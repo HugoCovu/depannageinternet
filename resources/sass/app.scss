@@ -1,0 +1,19 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+body
+{
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(34,0,255,1) 100%, rgba(255,255,255,0.9864320728291317) 100%);
+}
+#snowman
+{
+    width:250px;
+    height: 255px;
+}
