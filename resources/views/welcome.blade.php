@@ -39,21 +39,14 @@
                         </tbody>
                     </table>
                 </div>
-                //FAIRE UN ARRAY POUR STOCK LES PRODUITS
-                //FAIRE UN ARRAY POUR STOCK LES PRODUITS
                 <div class="col-7 m-4">
                 <h2>Détails produits : </h2>
-                @foreach($order['products'] as $product)
+                @foreach($arrayProducts as $product)
                     <p>
-                        Nom du ou des Produits : {{ $product['product_name'] }}
+                        Nom du ou des Produits : {{ $product['product_name'] }} {{$product['product_quantity']}}x <input type="checkbox">
                     </p>
                 @endforeach
-               <div class="col-7">
-{{--                    <ul>--}}
-{{--                        <li> Nom du ou des Produits : {{ $order['product_name'] }}</li>--}}
-{{--                    </ul>--}}
-{{--                </div>--}}
-            </div>
+                </div>
         @endif
     </div>
 </div>

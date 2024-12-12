@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use function Laravel\Prompts\warning;
+
 // A faire : un controller pour le carrier (transporteur),OK
 // qui permette de retourner le nom du transporteur OK
 // à partir de l'identifiant qui est présent dans arrayOrders[i]['transporteur']
@@ -30,9 +32,10 @@ class ApiController extends Controller
         $orders = $this->orderController->getOrders();
         // clef valeur en bas?.?
         $arrayOrders = [];
+        $arrayProducts = [];
 
         if (!empty($orders)) {
-            foreach ($orders as $i=> $order) {
+            foreach ($orders as $i => $order) {
                 // Récupérer les informations du client
                 $customer = $this->customerController->getCustomerById($order['id_customer']);
                 $carriers = $this->carrierController->getCarrier();
@@ -42,7 +45,7 @@ class ApiController extends Controller
 
 
                 foreach ($carriers as $carrier) {
-                    if($carrier['id'] == $order['id_carrier']) {
+                    if ($carrier['id'] == $order['id_carrier']) {
                         $arrayOrders[$i]['transporter'] = $carrier['name'];
                         break;
                     }
@@ -50,19 +53,15 @@ class ApiController extends Controller
 
                 $arrayOrders[$i]['customer'] = $customer['firstname'] . " " . $customer['lastname'];
                 $arrayOrders[$i]['product_quantity'] = count($order['associations']['order_rows']);
-                $arrayOrders[$i]['products'] = [];
                 foreach ($order['associations']['order_rows'] as $product) {
-                    array_push($arrayOrders[$i]['products'], $product);
+                    array_push($arrayProducts,$product);
                 }
 
             }
-
+            
+            return view('welcome', compact('arrayOrders','arrayProducts'));
         }
 
 
-
-        return view('welcome', compact('arrayOrders'));
     }
-
-
 }
