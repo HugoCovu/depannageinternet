@@ -41,11 +41,18 @@
                 </div>
                 <div class="col-7 m-4">
                 <h2>Détails produits : </h2>
-                @foreach($arrayProducts as $product)
-                    <p>
-                        Nom du ou des Produits : {{ $product['product_name'] }} {{$product['product_quantity']}}x <input type="checkbox">
-                    </p>
-                @endforeach
+                    @foreach($arrayReferences as $orderProducts)
+                        @foreach($orderProducts as $product) <!-- Deuxième boucle pour accéder à chaque produit -->
+                        <p>
+                            Nom du ou des Produits : {{ $product['product_name'] }}
+                            {{ $product['product_quantity'] }}x
+                            <input type="checkbox">
+                        </p>
+                        @endforeach
+                    @endforeach
+                    <div>
+                        <input type="submit" value="Envoyer"/>
+                    </div>
                 </div>
         @endif
     </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use function Laravel\Prompts\warning;
+use function PHPUnit\Framework\stringContains;
 
 // A faire : un controller pour le carrier (transporteur),OK
 // qui permette de retourner le nom du transporteur OK
@@ -32,7 +33,8 @@ class ApiController extends Controller
         $orders = $this->orderController->getOrders();
         // clef valeur en bas?.?
         $arrayOrders = [];
-        $arrayProducts = [];
+        $arrayReferences = [];
+        $compareArrays = [];
 
         if (!empty($orders)) {
             foreach ($orders as $i => $order) {
@@ -43,7 +45,7 @@ class ApiController extends Controller
                 $arrayOrders[$i]['order_reference'] = $order['reference'];
                 $arrayOrders[$i]['current_state'] = $order['current_state'];
 
-
+                // avoir le nom du transporteur ainsi que son nom
                 foreach ($carriers as $carrier) {
                     if ($carrier['id'] == $order['id_carrier']) {
                         $arrayOrders[$i]['transporter'] = $carrier['name'];
@@ -53,15 +55,73 @@ class ApiController extends Controller
 
                 $arrayOrders[$i]['customer'] = $customer['firstname'] . " " . $customer['lastname'];
                 $arrayOrders[$i]['product_quantity'] = count($order['associations']['order_rows']);
-                foreach ($order['associations']['order_rows'] as $product) {
-                    array_push($arrayProducts,$product);
-                }
+
+                array_push($arrayReferences, $this->orderController->getProductsInOrder($order['associations']['order_rows']));
 
             }
-            
-            return view('welcome', compact('arrayOrders','arrayProducts'));
+
+
+//                if($arrayReferences[$i]['product_name'] === $compareArrays[$i]['product_name']) {
+//                    echo $arrayOrders[$i] . ':' . 'est pareil' . $arrayReferences[$i];
+//                }
+
+
+//
+//                if($arrayOrders[$i]['product_name'] === $arrayReferences[$i]['product_name']) {
+//                    echo $arrayOrders[$i] . ':' . 'est pareil' . $arrayReferences[$i];
+//                }
+
+//                }
+
+//               if(array_intersect_key($arrayReferences ==)) {
+//
+//               }
+
+
         }
 
 
-    }
+        for ($i = 0; $i < count($arrayReferences); $i++) {
+            foreach ($arrayReferences[$i] as $item) {
+                if (!empty($item['reference']&& !empty($item['product_name'] && !empty($item['product_quantity']) ))) {
+                    $compareArrays[] = $item['reference'] ." ". $item['product_name'] . " ". $item['product_quantity'];
+
+
+
+                }
+            }
+        }
+
+
+//        for ($i = 0; $i < count($arrayReferences); $i++) {
+//            foreach ($arrayReferences[$i] as $item) {
+//                if (!empty($item['product_quantity'])) {
+//                    $compareArrays[] = $item['product_quantity'];
+//                }
+//            }
+//        }
+//        for ($i = 0; $i < count($arrayReferences); $i++) {
+//            foreach ($arrayReferences[$i] as $item) {
+//                if (!empty($item['reference'])) {
+//                    $compareArrays[] = $item['reference'];
+//                }
+//            }
+//        }
+//
+//
+
+
+
+//        for ($i = 0; $i < count($arrayReferences); $i++) {
+//            if ($arrayReferences[$i][0]['product_name'] == $compareArrays[$i]) {
+//                 return ; // Les valeurs sont égales, on retourne
+//            }
+//        }
+
+       dd($compareArrays);
+
+            return view('welcome', compact('arrayOrders', 'arrayReferences'));
+        }
+
+
 }
