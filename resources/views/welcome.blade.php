@@ -68,26 +68,14 @@
                 </div>
         @endif
     </div>
-            <button type="button" class="btn btn-primary m-5" data-bs-toggle="modal" data-bs-target="#modalWindow">
-                Test de la modal
-            </button>
-            <div class="modal fade" id="modalWindow" aria-labelledby="modal exemple" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title">Félicitation, voici votre modal !</h3>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close">
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Voici le body de votre premier modal</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="close"> Fermer
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            <div class="sidebar">
+                <h3>Affichage des produits cliqués</h3>
+                <ul>
+                    <li><a href="#">Mettre les cards </a></li>
+                    <li><a href="#">Une par une</a></li>
+                    <li><a href="#">Et afficher seulement</a></li>
+                    <li><a href="#">Quand le bouton est cliqué</a></li>
+                </ul>
             </div>
     </div>
     </div>
