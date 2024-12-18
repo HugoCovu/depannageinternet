@@ -60,67 +60,34 @@ class ApiController extends Controller
 
             }
 
-
-//                if($arrayReferences[$i]['product_name'] === $compareArrays[$i]['product_name']) {
-//                    echo $arrayOrders[$i] . ':' . 'est pareil' . $arrayReferences[$i];
-//                }
-
-
-//
-//                if($arrayOrders[$i]['product_name'] === $arrayReferences[$i]['product_name']) {
-//                    echo $arrayOrders[$i] . ':' . 'est pareil' . $arrayReferences[$i];
-//                }
-
-//                }
-
-//               if(array_intersect_key($arrayReferences ==)) {
-//
-//               }
-
-
         }
 
-
-        for ($i = 0; $i < count($arrayReferences); $i++) {
-            foreach ($arrayReferences[$i] as $item) {
-                if (!empty($item['reference']&& !empty($item['product_name'] && !empty($item['product_quantity']) ))) {
-                    $compareArrays[] = $item['reference'] ." ". $item['product_name'] . " ". $item['product_quantity'];
-
-
-
-                }
+        $n = 0;
+        for($i = 0; $i<count($arrayReferences); $i++){
+            foreach($arrayReferences[$i] as $products){
+                $compareArrays[$n]['reference'] = $products["reference"];
+                $compareArrays[$n]['name'] = $products['product_name'];
+                $compareArrays[$n]['qtt'] = $products['product_quantity'];
+                $n++;
             }
         }
 
+        $finalArray = [];
 
-//        for ($i = 0; $i < count($arrayReferences); $i++) {
-//            foreach ($arrayReferences[$i] as $item) {
-//                if (!empty($item['product_quantity'])) {
-//                    $compareArrays[] = $item['product_quantity'];
-//                }
-//            }
-//        }
-//        for ($i = 0; $i < count($arrayReferences); $i++) {
-//            foreach ($arrayReferences[$i] as $item) {
-//                if (!empty($item['reference'])) {
-//                    $compareArrays[] = $item['reference'];
-//                }
-//            }
-//        }
-//
-//
+        foreach($compareArrays as $item){
+            if(isset($finalArray[$item['reference']])){
+                $finalArray[$item['reference']]['quantity'] += $item['qtt'];
+            } else {
+                $finalArray[$item['reference']]['quantity'] = $item['qtt'];
+            }
+            $finalArray[$item['reference']]['name'] = $item['name'];
+        }
 
 
 
-//        for ($i = 0; $i < count($arrayReferences); $i++) {
-//            if ($arrayReferences[$i][0]['product_name'] == $compareArrays[$i]) {
-//                 return ; // Les valeurs sont égales, on retourne
-//            }
-//        }
 
-       dd($compareArrays);
 
-            return view('welcome', compact('arrayOrders', 'arrayReferences'));
+            return view('welcome', compact('arrayOrders', 'arrayReferences','finalArray'));
         }
 
 

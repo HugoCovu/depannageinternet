@@ -39,24 +39,57 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-7 m-4">
-                <h2>Détails produits : </h2>
-                    @foreach($arrayReferences as $orderProducts)
-                        @foreach($orderProducts as $product) <!-- Deuxième boucle pour accéder à chaque produit -->
-                        <p>
-                            Nom du ou des Produits : {{ $product['product_name'] }}
-                            {{ $product['product_quantity'] }}x
-                            <input type="checkbox">
-                        </p>
+                <div class="d-flex col-7 m-4 flex-column">
+                    <h2 class="d-block mb-3">Détails produits :</h2>
+                    <div class="card-body d-flex flex-wrap" style="width: 100%;">
+                        @foreach($finalArray as $ref => $product)
+                            <div class="card mb-3" style="width: 30%; border: 1px solid #ddd; margin: 5px;">
+                            <div class="card-header bg-primary text-white">
+                                    Référence : {{ $ref }}
+                                </div>
+                                <div class="card-body d-flex cardModified">
+                                    <div>
+                                        <div>
+                                            <strong>Nom du ou des Produits :</strong>
+                                            {{ $product['name'] }}<br>
+                                        </div>
+                                        <div class="d-flex">
+                                            <strong>Quantité :</strong>
+                                            <span class="badge bg-danger badge-quantite">{{ $product['quantity'] }}</span>
+                                            <div class="d-flex">
+                                                <input type="checkbox" id="product-{{ $ref }}" style="width: 100px; display:flex; margin-left: -40px; justify-content:start;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
-                    @endforeach
-                    <div>
-                        <input type="submit" value="Envoyer"/>
                     </div>
                 </div>
         @endif
     </div>
-</div>
+            <button type="button" class="btn btn-primary m-5" data-bs-toggle="modal" data-bs-target="#modalWindow">
+                Test de la modal
+            </button>
+            <div class="modal fade" id="modalWindow" aria-labelledby="modal exemple" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Félicitation, voici votre modal !</h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close">
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Voici le body de votre premier modal</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="close"> Fermer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
     </div>
 </body>
 </html>

@@ -12,8 +12,12 @@ body
     background: rgb(255,255,255);
     background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(34,0,255,1) 100%, rgba(255,255,255,0.9864320728291317) 100%);
 }
-#snowman
+.cardModified
 {
-    width:250px;
-    height: 255px;
+    padding: 3px;
+}
+
+.badge-quantite{
+    line-height : 1.3;
+    margin: 0 5px;
 }
