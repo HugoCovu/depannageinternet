@@ -41,7 +41,7 @@
                 </div>
                 <div class="d-flex col-7 m-4 flex-column">
                     <h2 class="d-block mb-3">Détails produits :</h2>
-                    <div class="card-body d-flex flex-wrap" style="width: 100%;">
+                    <div class="card-body d-flex flex-wrap cardJs" style="width: 100%;">
                         @foreach($finalArray as $ref => $product)
                             <div class="card mb-3" style="width: 30%; border: 1px solid #ddd; margin: 5px;">
                             <div class="card-header bg-primary text-white">
@@ -68,14 +68,9 @@
                 </div>
         @endif
     </div>
-            <div class="sidebar">
+            <div class="sidebar" style="visibility: hidden;">
                 <h3>Affichage des produits cliqués</h3>
-                <ul>
-                    <li><a href="#">Mettre les cards </a></li>
-                    <li><a href="#">Une par une</a></li>
-                    <li><a href="#">Et afficher seulement</a></li>
-                    <li><a href="#">Quand le bouton est cliqué</a></li>
-                </ul>
+
             </div>
     </div>
     </div>

@@ -61,7 +61,7 @@ class ApiController extends Controller
             }
 
         }
-
+    //  Règles de gestions pour product_name
         $n = 0;
         for($i = 0; $i<count($arrayReferences); $i++){
             foreach($arrayReferences[$i] as $products){
