@@ -17,16 +17,16 @@
         @else
             <h2>Commandes en attente ({{ count($arrayOrders) }})</h2>
 
-            <div class="d-flex">
+            <div class="d-flex" id="changingContainer">
 
                 <div class="col-5">
                     <table class="table table-striped mt-4">
                         <thead>
-                            <tr>
-                                <th scope="col">Référence Commande</th>
-                                <th scope="col">Client</th>
-                                <th scope="col">Transporteur</th>
-                            </tr>
+                        <tr>
+                            <th scope="col">Référence Commande</th>
+                            <th scope="col">Client</th>
+                            <th scope="col">Transporteur</th>
+                        </tr>
                         </thead>
                         <tbody>
                         @foreach($arrayOrders as $order)
@@ -44,20 +44,22 @@
                     <div class="card-body d-flex flex-wrap cardJs" style="width: 100%;">
                         @foreach($finalArray as $ref => $product)
                             <div class="card mb-3" style="width: 30%; border: 1px solid #ddd; margin: 5px;">
-                            <div class="card-header bg-primary text-white">
+                                <div class="card-header bg-primary text-white">
                                     Référence : {{ $ref }}
                                 </div>
                                 <div class="card-body d-flex cardModified">
                                     <div>
-                                        <div>
-                                            <strong>Nom du ou des Produits :</strong>
-                                            {{ $product['name'] }}<br>
+                                        <div class="nameProduct">
+                                            <strong>Produits :</strong>
+                                            <span>{{ $product['name'] }}</span>
+                                            <br>
                                         </div>
                                         <div class="d-flex">
-                                            <strong>Quantité :</strong>
+                                            <strong class="quantity">Quantité :</strong>
                                             <span class="badge bg-danger badge-quantite">{{ $product['quantity'] }}</span>
                                             <div class="d-flex">
-                                                <input type="checkbox" id="product-{{ $ref }}" style="width: 100px; display:flex; margin-left: -40px; justify-content:start;">
+                                                <div class="reference"></div>
+                                                <input type="checkbox" class="checkboxClass" id="product-{{ $ref }}" style="width: 100px; display:flex; margin-left: -40px; justify-content:start;">
                                             </div>
                                         </div>
                                     </div>
@@ -66,13 +68,17 @@
                         @endforeach
                     </div>
                 </div>
-        @endif
-    </div>
-            <div class="sidebar" style="visibility: hidden;">
-                <h3>Affichage des produits cliqués</h3>
-
+                @endif
             </div>
+            <div class="sidebar" style="visibility: hidden;">
+                <ul></ul>
+                <div class="nothingForNow">
+                    <input type="submit" value="Envoyer"/>
+
+                </div>
+            </div>
+
     </div>
-    </div>
+</div>
 </body>
 </html>
